@@ -130,11 +130,9 @@ body {
     border-radius: 10px;
     touch-action: none;
     cursor: pointer;
-    padding: 20px 0;
-    background-clip: content-box;
+    margin: 20px 0;
     -webkit-user-select: none;
 }
-
 
 .progress {
     position: relative;
