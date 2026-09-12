@@ -124,10 +124,11 @@
     });
 
     progressBar.addEventListener("pointermove", function (e) {
-        if (isDragging) {
-            seekFromPointer(e);
-        }
-    });
+    if (isDragging) {
+        e.preventDefault();
+        seekFromPointer(e);
+    }
+});
 
     progressBar.addEventListener("pointerup", function () {
         isDragging = false;
