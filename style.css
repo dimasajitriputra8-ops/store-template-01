@@ -140,13 +140,15 @@ body {
 
 .progress-knob {
     position: absolute;
-    right: -5px;
+    left: 0;
     top: 50%;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: white;
     border-radius: 50%;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    z-index: 2;
 }
 
 .time-row {
