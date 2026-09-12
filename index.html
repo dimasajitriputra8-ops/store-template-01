@@ -58,6 +58,26 @@
     <script>
     const audio = document.getElementById("audio");
     const playButton = document.querySelector(".play-button");
+    const progress = document.querySelector(".progress");
+    const currentTime = document.querySelector(".current-time");
+    const totalTime = document.querySelector(".total-time");
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return minutes + ":" + String(secs).padStart(2, "0");
+    }
+
+    audio.addEventListener("loadedmetadata", function () {
+        totalTime.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", function () {
+        currentTime.textContent = formatTime(audio.currentTime);
+
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = percent + "%";
+    });
 
     playButton.addEventListener("click", function () {
         if (audio.paused) {
@@ -68,7 +88,13 @@
             playButton.textContent = "▶";
         }
     });
-    </script>
+
+    audio.addEventListener("ended", function () {
+        playButton.textContent = "▶";
+        progress.style.width = "0%";
+        currentTime.textContent = "0:00";
+    });
+            </script>
 
 </body>
 </html>
