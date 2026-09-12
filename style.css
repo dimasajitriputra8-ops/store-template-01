@@ -65,3 +65,9 @@ body {
     font-weight: bold;
     cursor: pointer;
   }
+
+.product img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
