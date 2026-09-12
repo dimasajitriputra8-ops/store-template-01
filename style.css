@@ -129,3 +129,11 @@ body {
     background: white;
     border-radius: 10px;
 }
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 11px;
+    color: #999;
+}
