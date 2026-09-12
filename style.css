@@ -134,6 +134,32 @@ body {
     font-weight: 700;
 }
 
+.play-icon.pause {
+    width: 12px;
+    height: 16px;
+    position: relative;
+    font-size: 0;
+}
+
+.play-icon.pause::before,
+.play-icon.pause::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background: white;
+    border-radius: 1px;
+}
+
+.play-icon.pause::before {
+    left: 0;
+}
+
+.play-icon.pause::after {
+    right: 0;
+}
+
 .music-info {
     flex: 1;
     width: 100%;
