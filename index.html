@@ -58,38 +58,15 @@
 
     <button class="buy-button">BELI</button>
     <script>
-        const progressBar = document.querySelector(".progress-bar");
-const progressKnob = document.querySelector(".progress-knob");
-
-let isDragging = false;
-
-function seekAudio(e) {
-    const rect = progressBar.getBoundingClientRect();
-    let percent = (e.clientX - rect.left) / rect.width;
-
-    percent = Math.max(0, Math.min(1, percent));
-
-    audio.currentTime = percent * audio.duration;
-}
-
-progressKnob.addEventListener("pointerdown", function () {
-    isDragging = true;
-});
-
-document.addEventListener("pointermove", function (e) {
-    if (isDragging) {
-        seekAudio(e);
-    }
-});
-
-document.addEventListener("pointerup", function () {
-    isDragging = false;
-});
     const audio = document.getElementById("audio");
     const playButton = document.querySelector(".play-button");
     const progress = document.querySelector(".progress");
+    const progressBar = document.querySelector(".progress-bar");
+    const progressKnob = document.querySelector(".progress-knob");
     const currentTime = document.querySelector(".current-time");
     const totalTime = document.querySelector(".total-time");
+
+    let isDragging = false;
 
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
@@ -97,17 +74,38 @@ document.addEventListener("pointerup", function () {
         return minutes + ":" + String(secs).padStart(2, "0");
     }
 
+    function updateProgress(percent) {
+        percent = Math.max(0, Math.min(1, percent));
+
+        progress.style.width = (percent * 100) + "%";
+        progressKnob.style.left = (percent * 100) + "%";
+
+        if (audio.duration) {
+            audio.currentTime = percent * audio.duration;
+        }
+    }
+
+    function seekFromPointer(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+
+        updateProgress(percent);
+    }
+
     audio.addEventListener("loadedmetadata", function () {
         totalTime.textContent = formatTime(audio.duration);
     });
 
     audio.addEventListener("timeupdate", function () {
-    currentTime.textContent = formatTime(audio.currentTime);
+        if (!isDragging) {
+            const percent = audio.currentTime / audio.duration;
 
-    const percent = (audio.currentTime / audio.duration) * 100;
-    progress.style.width = percent + "%";
-    progressKnob.style.left = percent + "%";
-});
+            progress.style.width = (percent * 100) + "%";
+            progressKnob.style.left = (percent * 100) + "%";
+        }
+
+        currentTime.textContent = formatTime(audio.currentTime);
+    });
 
     playButton.addEventListener("click", function () {
         if (audio.paused) {
@@ -119,12 +117,32 @@ document.addEventListener("pointerup", function () {
         }
     });
 
+    progressBar.addEventListener("pointerdown", function (e) {
+        isDragging = true;
+        progressBar.setPointerCapture(e.pointerId);
+        seekFromPointer(e);
+    });
+
+    progressBar.addEventListener("pointermove", function (e) {
+        if (isDragging) {
+            seekFromPointer(e);
+        }
+    });
+
+    progressBar.addEventListener("pointerup", function () {
+        isDragging = false;
+    });
+
+    progressBar.addEventListener("pointercancel", function () {
+        isDragging = false;
+    });
+
     audio.addEventListener("ended", function () {
         playButton.textContent = "▶";
         progress.style.width = "0%";
+        progressKnob.style.left = "0%";
         currentTime.textContent = "0:00";
     });
-            </script>
-
+    </script>
 </body>
 </html>
