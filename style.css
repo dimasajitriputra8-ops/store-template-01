@@ -127,6 +127,13 @@ body {
     opacity: 0.7;
 }
 
+.play-icon {
+    display: block;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 700;
+}
+
 .music-info {
     flex: 1;
     width: 100%;
