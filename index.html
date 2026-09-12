@@ -102,11 +102,12 @@ document.addEventListener("pointerup", function () {
     });
 
     audio.addEventListener("timeupdate", function () {
-        currentTime.textContent = formatTime(audio.currentTime);
+    currentTime.textContent = formatTime(audio.currentTime);
 
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progress.style.width = percent + "%";
-    });
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = percent + "%";
+    progressKnob.style.left = percent + "%";
+});
 
     playButton.addEventListener("click", function () {
         if (audio.paused) {
