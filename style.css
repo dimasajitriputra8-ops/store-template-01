@@ -56,6 +56,12 @@ body {
     font-size: 20px;
 }
 
+.sold {
+    color: #777;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
 .buy-button {
     display: block;
     width: 100%;
