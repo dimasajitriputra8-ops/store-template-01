@@ -60,12 +60,31 @@
     <button class="buy-button">BELI</button>
     <script>
         const progressBar = document.querySelector(".progress-bar");
+const progressKnob = document.querySelector(".progress-knob");
 
-progressBar.addEventListener("click", function (e) {
+let isDragging = false;
+
+function seekAudio(e) {
     const rect = progressBar.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
+    let percent = (e.clientX - rect.left) / rect.width;
+
+    percent = Math.max(0, Math.min(1, percent));
 
     audio.currentTime = percent * audio.duration;
+}
+
+progressKnob.addEventListener("pointerdown", function () {
+    isDragging = true;
+});
+
+document.addEventListener("pointermove", function (e) {
+    if (isDragging) {
+        seekAudio(e);
+    }
+});
+
+document.addEventListener("pointerup", function () {
+    isDragging = false;
 });
     const audio = document.getElementById("audio");
     const playButton = document.querySelector(".play-button");
