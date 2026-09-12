@@ -132,7 +132,9 @@ body {
     cursor: pointer;
     padding: 20px 0;
     background-clip: content-box;
+    -webkit-user-select: none;
 }
+
 
 .progress {
     position: relative;
