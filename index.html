@@ -17,9 +17,20 @@
             <img src="file_0000000039ac8211adabc3ce733136e4.png" alt="DERBAYMIX SAMPLE PACK">
             <h3>DERBAYMIX SAMPLE PACK</h3>
 <p>Sample Pack Fl Studio Mobile.</p>
-            <audio controls>
+            <div class="music-player">
+    <button class="play-button">▶</button>
+
+    <div class="music-info">
+        <span>DERBAYMIX SAMPLE</span>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+</div>
+
+<audio id="audio">
     <source src="./body pata pata JDM STYLE.mp3" type="audio/mpeg">
-            </audio>
+</audio>
 <p class="price">Rp10.000</p>
             <a href="#" class="buy-button">BELI</a>
         </div>
@@ -36,6 +47,20 @@
     <p>Rp10.000</p>
 
     <button>BELI</button>
+    <script>
+    const audio = document.getElementById("audio");
+    const playButton = document.querySelector(".play-button");
+
+    playButton.addEventListener("click", function () {
+        if (audio.paused) {
+            audio.play();
+            playButton.textContent = "❚❚";
+        } else {
+            audio.pause();
+            playButton.textContent = "▶";
+        }
+    });
+    </script>
 
 </body>
 </html>
