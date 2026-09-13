@@ -208,6 +208,13 @@ audio.addEventListener("play", function () {
 
     animateSpectrum();
 });
+
+        const shapes = document.querySelectorAll(".music-shape");
+
+shapes.forEach((shape) => {
+    shape.style.left = (5 + Math.random() * 85) + "%";
+    shape.style.top = (5 + Math.random() * 85) + "%";
+});
         
     </script>
 </body>
