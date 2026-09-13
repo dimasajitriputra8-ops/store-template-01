@@ -322,16 +322,19 @@ body::before {
 .shape-1 {
     top: 10%;
     left: 10%;
+    opacity: 0.08;
 }
 
 .shape-2 {
     top: 25%;
     left: 80%;
+    opacity: 0.11;
 }
 
 .shape-3 {
     top: 75%;
     left: 70%;
+    opacity: 0.14;
 }
 
 .shape-1 {
