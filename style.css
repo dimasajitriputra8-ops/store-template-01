@@ -333,3 +333,15 @@ body::before {
     top: 80%;
     left: 35%;
 }
+
+.shape-1 {
+    font-size: 45px;
+}
+
+.shape-2 {
+    font-size: 80px;
+}
+
+.shape-3 {
+    font-size: 60px;
+}
