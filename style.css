@@ -357,4 +357,5 @@ body::before {
     opacity: 0.08;
     filter: drop-shadow(0 0 15px #9b4dff);
     transform: rotate(-15deg);
+    animation: headphoneFloat 10s ease-in-out infinite;
 }
