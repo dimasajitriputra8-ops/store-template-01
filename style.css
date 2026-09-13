@@ -141,10 +141,11 @@ body {
 }
 
 .play-icon.pause {
-    width: 12px;
+    width: 16px;
     height: 16px;
     position: relative;
     font-size: 0;
+    transform: translateY(1px);
 }
 
 .play-icon.pause::before,
@@ -159,11 +160,11 @@ body {
 }
 
 .play-icon.pause::before {
-    left: 0;
+    left: 2px;
 }
 
 .play-icon.pause::after {
-    right: 0;
+    right: 2px;
 }
 
 .music-info {
