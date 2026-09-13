@@ -189,11 +189,14 @@ function animateSpectrum() {
         bass.reduce((sum, value) => sum + value, 0) / bass.length;
 
     spectrumBars.forEach((bar, index) => {
-        const variation = frequencyData[index * 2] || 0;
-        const height = 3 + (averageBass * 0.25) + (variation * 0.12);
+    const frequencyIndex = index * 3;
+    const frequency = frequencyData[frequencyIndex] || 0;
 
-        bar.style.height = Math.min(height, 22) + "px";
-    });
+    const bassBoost = averageBass * (0.12 + index * 0.025);
+    const height = 3 + (frequency * 0.16) + bassBoost;
+
+    bar.style.height = Math.min(height, 22) + "px";
+});
 
     requestAnimationFrame(animateSpectrum);
 }
