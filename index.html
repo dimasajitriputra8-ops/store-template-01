@@ -87,8 +87,11 @@
         totalTime.textContent = formatTime(audio.duration);
     });
 
-    audio.addEventListener("timeupdate", function () {
-        if (!isDragging) {
+    let animationFrame;
+
+audio.addEventListener("play", function () {
+    function smoothProgress() {
+        if (!audio.paused && !isDragging && audio.duration) {
             const percent = audio.currentTime / audio.duration;
 
             progress.style.width = (percent * 100) + "%";
@@ -96,7 +99,19 @@
         }
 
         currentTime.textContent = formatTime(audio.currentTime);
-    });
+
+        if (!audio.paused) {
+            animationFrame = requestAnimationFrame(smoothProgress);
+        }
+    }
+
+    cancelAnimationFrame(animationFrame);
+    smoothProgress();
+});
+
+audio.addEventListener("pause", function () {
+    cancelAnimationFrame(animationFrame);
+});
 
     playButton.addEventListener("click", function () {
     if (audio.paused) {
