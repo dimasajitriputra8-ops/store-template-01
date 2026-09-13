@@ -166,6 +166,46 @@ audio.addEventListener("pause", function () {
     progressKnob.style.left = "0%";
     currentTime.textContent = "0:00";
 });
+
+        const spectrumBars = document.querySelectorAll(".mini-spectrum span");
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const analyser = audioContext.createAnalyser();
+analyser.fftSize = 256;
+
+const source = audioContext.createMediaElementSource(audio);
+source.connect(analyser);
+analyser.connect(audioContext.destination);
+
+const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+function animateSpectrum() {
+    analyser.getByteFrequencyData(frequencyData);
+
+    // Ambil frekuensi rendah = area bass/kick
+    const bass = frequencyData.slice(0, 10);
+
+    const averageBass =
+        bass.reduce((sum, value) => sum + value, 0) / bass.length;
+
+    spectrumBars.forEach((bar, index) => {
+        const variation = frequencyData[index * 2] || 0;
+        const height = 4 + (averageBass * 0.10) + (variation * 0.04);
+
+        bar.style.height = Math.min(height, 22) + "px";
+    });
+
+    requestAnimationFrame(animateSpectrum);
+}
+
+audio.addEventListener("play", function () {
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+
+    animateSpectrum();
+});
+        
     </script>
 </body>
 </html>
