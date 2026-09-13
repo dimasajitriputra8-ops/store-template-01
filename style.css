@@ -234,14 +234,18 @@ body {
     display: flex;
     align-items: flex-end;
     gap: 2px;
-    height: 22px;
+    height: 16px;
+    padding: 3px 4px;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 5px;
 }
 
 .mini-spectrum span {
-    width: 3px;
-    height: 6px;
+    width: 2px;
+    height: 5px;
     background: white;
     border-radius: 2px;
+    transition: height 0.04s linear;
 }
 
 .mini-spectrum span:nth-child(1) {
