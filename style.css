@@ -96,7 +96,7 @@ body {
 
 .music-player {
     display: flex !important;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
