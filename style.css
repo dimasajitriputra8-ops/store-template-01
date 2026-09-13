@@ -218,3 +218,28 @@ body {
     font-size: 11px;
     color: #999;
 }
+
+.product-image {
+    position: relative;
+}
+
+.product-image img {
+    display: block;
+}
+
+.mini-spectrum {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 22px;
+}
+
+.mini-spectrum span {
+    width: 3px;
+    height: 6px;
+    background: white;
+    border-radius: 2px;
+}
