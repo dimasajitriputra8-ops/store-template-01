@@ -303,4 +303,5 @@ body::before {
     filter: blur(0.5px);
     top: 20%;
     left: 20%;
+    color: #b45cff;
 }
