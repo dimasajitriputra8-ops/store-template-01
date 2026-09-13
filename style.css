@@ -245,7 +245,7 @@ body {
     height: 5px;
     background: white;
     border-radius: 2px;
-    transition: height 0.04s linear;
+    
 }
 
 .mini-spectrum span:nth-child(1) {
