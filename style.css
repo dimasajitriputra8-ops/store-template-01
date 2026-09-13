@@ -242,10 +242,9 @@ body {
 
 .mini-spectrum span {
     width: 2px;
-    height: 5px;
-    background: white;
+    height: 8px;
+    background: #999;
     border-radius: 2px;
-    
 }
 
 .mini-spectrum span:nth-child(1) {
