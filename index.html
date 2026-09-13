@@ -143,11 +143,12 @@
     });
 
     audio.addEventListener("ended", function () {
-        playButton.textContent = "▶";
-        progress.style.width = "0%";
-        progressKnob.style.left = "0%";
-        currentTime.textContent = "0:00";
-    });
+    playIcon.textContent = "▶";
+    playIcon.classList.remove("pause");
+    progress.style.width = "0%";
+    progressKnob.style.left = "0%";
+    currentTime.textContent = "0:00";
+});
     </script>
 </body>
 </html>
