@@ -299,7 +299,7 @@ body::before {
 .music-shape {
     position: absolute;
     width: 120px;
-    opacity: 0.08;
+    opacity: 0.12;
     filter: blur(0.5px);
     top: 20%;
     left: 20%;
