@@ -295,3 +295,10 @@ body::before {
     overflow: hidden;
     z-index: -1;
 }
+
+.music-shape {
+    position: absolute;
+    width: 120px;
+    opacity: 0.08;
+    filter: blur(0.5px);
+}
