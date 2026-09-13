@@ -232,12 +232,9 @@ body {
     right: 10px;
     bottom: 10px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 2px;
-    height: 16px;
-    padding: 3px 4px;
-    background: rgba(0, 0, 0, 0.45);
-    border-radius: 5px;
+    height: 26px;
 }
 
 .mini-spectrum span {
