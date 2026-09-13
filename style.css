@@ -301,4 +301,6 @@ body::before {
     width: 120px;
     opacity: 0.08;
     filter: blur(0.5px);
+    top: 20%;
+    left: 20%;
 }
