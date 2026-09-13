@@ -243,3 +243,35 @@ body {
     background: white;
     border-radius: 2px;
 }
+
+.mini-spectrum span:nth-child(1) {
+    height: 8px;
+}
+
+.mini-spectrum span:nth-child(2) {
+    height: 14px;
+}
+
+.mini-spectrum span:nth-child(3) {
+    height: 20px;
+}
+
+.mini-spectrum span:nth-child(4) {
+    height: 11px;
+}
+
+.mini-spectrum span:nth-child(5) {
+    height: 18px;
+}
+
+.mini-spectrum span:nth-child(6) {
+    height: 9px;
+}
+
+.mini-spectrum span:nth-child(7) {
+    height: 16px;
+}
+
+.mini-spectrum span:nth-child(8) {
+    height: 12px;
+}
