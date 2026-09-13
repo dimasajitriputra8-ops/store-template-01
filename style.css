@@ -318,3 +318,18 @@ body::before {
         transform: translateY(-20px);
     }
             }
+
+.shape-1 {
+    top: 15%;
+    left: 15%;
+}
+
+.shape-2 {
+    top: 50%;
+    left: 75%;
+}
+
+.shape-3 {
+    top: 80%;
+    left: 35%;
+}
