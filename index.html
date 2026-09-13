@@ -189,7 +189,7 @@ function animateSpectrum() {
     const frequency = frequencyData[frequencyIndex] || 0;
 
     const bassBoost = averageBass * (0.12 + index * 0.025);
-    const height = 3 + (frequency * 0.16) + bassBoost;
+    const height = 2 + (frequency * 0.28) + (averageBass * 0.18);
 
     bar.style.height = Math.min(height, 22) + "px";
 });
