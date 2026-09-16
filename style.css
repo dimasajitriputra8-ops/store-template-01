@@ -68,7 +68,7 @@ body::before {
     box-shadow:
         0 0 12px rgba(155, 77, 255, 0.45),
         0 0 30px rgba(155, 77, 255, 0.18);
-        transition: none;
+        
 }
 
 .product h3 {
