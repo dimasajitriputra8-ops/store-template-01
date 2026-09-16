@@ -300,7 +300,7 @@ body::before {
     position: absolute;
     width: 160px;
     opacity: 0.15;
-    filter: blur(0.5px) drop-shadow(0 0 12px #9b4dff);
+    filter: blur(0.5px) drop-shadow(0 0 18px #9b4dff);
     top: 20%;
     left: 20%;
     color: #b45cff;
