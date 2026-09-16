@@ -215,6 +215,7 @@ audio.addEventListener("play", function () {
 shapes.forEach((shape) => {
     shape.style.left = (5 + Math.random() * 90) + "%";
     shape.style.top = (5 + Math.random() * 90) + "%";
+    shape.style.animationDuration = (6 + Math.random() * 8) + "s";
     shape.style.transform =
     `rotate(${Math.random() * 40 - 20}deg)`;
 });
