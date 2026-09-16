@@ -106,6 +106,8 @@
     let animationFrame;
 
 audio.addEventListener("play", function () {
+    productCard.classList.add("playing");
+
     function smoothProgress() {
         if (!audio.paused && !isDragging && audio.duration) {
             const percent = audio.currentTime / audio.duration;
@@ -127,6 +129,7 @@ audio.addEventListener("play", function () {
 
 audio.addEventListener("pause", function () {
     cancelAnimationFrame(animationFrame);
+    productCard.classList.remove("playing");
 });
 
     playButton.addEventListener("click", function () {
@@ -163,6 +166,7 @@ audio.addEventListener("pause", function () {
     });
 
     audio.addEventListener("ended", function () {
+    productCard.classList.remove("playing");
     playIcon.textContent = "▶";
     playIcon.classList.remove("pause");
     progress.style.width = "0%";
