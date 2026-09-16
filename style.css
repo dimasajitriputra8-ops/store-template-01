@@ -357,3 +357,13 @@ body::before {
     transform: rotate(-15deg);
     animation: headphoneFloat 10s ease-in-out infinite;
 }
+
+@keyframes headphoneFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-15deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(-10deg);
+    }
+}
