@@ -55,7 +55,7 @@ body::before {
 
 .product {
     background: #1a1a1a;
-    border: 1px solid #292929;
+    border: 1px solid rgba(155, 77, 255, 0.18);
     border-radius: 15px;
     padding: 20px;
     margin-top: 20px;
@@ -110,14 +110,15 @@ body::before {
     width: 100%;
     padding: 13px;
     margin-top: 15px;
-    border: none;
+    border: 1px solid #6b3fa0;
     border-radius: 10px;
-    background: white;
-    color: black;
+    background: #160b20;
+    color: #6b3fa0;
     font-weight: 900;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .buy-button:hover {
