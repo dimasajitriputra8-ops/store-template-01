@@ -83,16 +83,17 @@
     }
 
     function updateProgress(percent) {
-        percent = Math.max(0, Math.min(1, percent));
+    percent = Math.max(0, Math.min(1, percent));
 
-        progress.style.width = (percent * 100) + "%";
-        progressKnob.style.left = (percent * 100) + "%";
+    progress.style.width = (percent * 100) + "%";
+    progressKnob.style.left = (percent * 100) + "%";
 
-        if (audio.duration) {
-            audio.currentTime = percent * audio.duration;
-        }
+    if (audio.duration) {
+        audio.currentTime = percent * audio.duration;
+        currentTime.textContent = formatTime(audio.currentTime);
     }
-
+    }
+        
     function seekFromPointer(e) {
         const rect = progressBar.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
