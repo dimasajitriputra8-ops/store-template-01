@@ -194,10 +194,8 @@ products.forEach((product) => {
     });
 
     playButton.addEventListener("click", function () {
-        playButton.addEventListener("click", function () {
     if (audio.paused) {
 
-        // Hentikan semua audio lain
         products.forEach((otherProduct) => {
             const otherAudio = otherProduct.querySelector("audio");
             const otherIcon = otherProduct.querySelector(".play-icon");
@@ -211,6 +209,19 @@ products.forEach((product) => {
                 otherProduct.classList.remove("playing");
             }
         });
+
+        audio.play();
+
+        playIcon.textContent = "";
+        playIcon.classList.add("pause");
+
+    } else {
+        audio.pause();
+
+        playIcon.textContent = "▶";
+        playIcon.classList.remove("pause");
+    }
+});
 
         audio.play();
 
