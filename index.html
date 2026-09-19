@@ -202,12 +202,23 @@ products.forEach((product) => {
             const otherIcon = otherProduct.querySelector(".play-icon");
 
             if (otherAudio !== audio) {
-                otherAudio.pause();
+    otherAudio.pause();
 
-                otherIcon.textContent = "▶";
-                otherIcon.classList.remove("pause");
+    // Reset card lain ke awal
+    otherAudio.currentTime = 0;
 
-                otherProduct.classList.remove("playing");
+    otherIcon.textContent = "▶";
+    otherIcon.classList.remove("pause");
+
+    otherProduct.classList.remove("playing");
+
+    const otherProgress = otherProduct.querySelector(".progress");
+    const otherKnob = otherProduct.querySelector(".progress-knob");
+    const otherCurrentTime = otherProduct.querySelector(".current-time");
+
+    otherProgress.style.width = "0%";
+    otherKnob.style.left = "0%";
+    otherCurrentTime.textContent = "0:00";
             }
         });
 
