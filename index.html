@@ -97,7 +97,7 @@
             </div>
 
             <audio>
-                <source src="./#MASTERING 2.mp3" type="audio/mpeg">
+                <source src="./%23MASTERING%202.mp3" type="audio/mpeg">
             </audio>
 
             <p class="price">Rp10.000</p>
@@ -106,17 +106,23 @@
             </div>
 
     <script>
-    const audio = document.getElementById("audio");
-    const playButton = document.querySelector(".play-button");
-        const productCard = document.querySelector(".product");
-        const playIcon = document.querySelector(".play-icon");
-    const progress = document.querySelector(".progress");
-    const progressBar = document.querySelector(".progress-bar");
-    const progressKnob = document.querySelector(".progress-knob");
-    const currentTime = document.querySelector(".current-time");
-    const totalTime = document.querySelector(".total-time");
+    const products = document.querySelectorAll(".product");
+
+products.forEach((product) => {
+    const audio = product.querySelector("audio");
+    const playButton = product.querySelector(".play-button");
+    const playIcon = product.querySelector(".play-icon");
+    const progress = product.querySelector(".progress");
+    const progressBar = product.querySelector(".progress-bar");
+    const progressKnob = product.querySelector(".progress-knob");
+    const currentTime = product.querySelector(".current-time");
+    const totalTime = product.querySelector(".total-time");
+    const spectrumBars = product.querySelectorAll(".mini-spectrum span");
 
     let isDragging = false;
+    let animationFrame;
+    let spectrumAnimationFrame;
+    let spectrumRunning = false;
 
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
@@ -125,17 +131,17 @@
     }
 
     function updateProgress(percent) {
-    percent = Math.max(0, Math.min(1, percent));
+        percent = Math.max(0, Math.min(1, percent));
 
-    progress.style.width = (percent * 100) + "%";
-    progressKnob.style.left = (percent * 100) + "%";
+        progress.style.width = (percent * 100) + "%";
+        progressKnob.style.left = (percent * 100) + "%";
 
-    if (audio.duration) {
-        audio.currentTime = percent * audio.duration;
-        currentTime.textContent = formatTime(audio.currentTime);
+        if (audio.duration) {
+            audio.currentTime = percent * audio.duration;
+            currentTime.textContent = formatTime(audio.currentTime);
+        }
     }
-    }
-        
+
     function seekFromPointer(e) {
         const rect = progressBar.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
@@ -147,46 +153,59 @@
         totalTime.textContent = formatTime(audio.duration);
     });
 
-    let animationFrame;
+    audio.addEventListener("play", function () {
+        product.classList.add("playing");
 
-audio.addEventListener("play", function () {
-    productCard.classList.add("playing");
+        function smoothProgress() {
+            if (!audio.paused && !isDragging && audio.duration) {
+                const percent = audio.currentTime / audio.duration;
 
-    function smoothProgress() {
-        if (!audio.paused && !isDragging && audio.duration) {
-            const percent = audio.currentTime / audio.duration;
+                progress.style.width = (percent * 100) + "%";
+                progressKnob.style.left = (percent * 100) + "%";
+            }
 
-            progress.style.width = (percent * 100) + "%";
-            progressKnob.style.left = (percent * 100) + "%";
+            currentTime.textContent = formatTime(audio.currentTime);
+
+            if (!audio.paused) {
+                animationFrame = requestAnimationFrame(smoothProgress);
+            }
         }
 
-        currentTime.textContent = formatTime(audio.currentTime);
+        cancelAnimationFrame(animationFrame);
+        smoothProgress();
 
-        if (!audio.paused) {
-            animationFrame = requestAnimationFrame(smoothProgress);
+        if (!spectrumRunning) {
+            spectrumRunning = true;
+
+            if (audioContext.state === "suspended") {
+                audioContext.resume();
+            }
+
+            animateSpectrum();
         }
-    }
+    });
 
-    cancelAnimationFrame(animationFrame);
-    smoothProgress();
-});
+    audio.addEventListener("pause", function () {
+        cancelAnimationFrame(animationFrame);
+        cancelAnimationFrame(spectrumAnimationFrame);
 
-audio.addEventListener("pause", function () {
-    cancelAnimationFrame(animationFrame);
-    productCard.classList.remove("playing");
-});
+        spectrumRunning = false;
+        product.classList.remove("playing");
+    });
 
     playButton.addEventListener("click", function () {
-    if (audio.paused) {
-        audio.play();
-        playIcon.textContent = "";
-        playIcon.classList.add("pause");
-    } else {
-        audio.pause();
-        playIcon.textContent = "▶";
-        playIcon.classList.remove("pause");
-    }
-});
+        if (audio.paused) {
+            audio.play();
+
+            playIcon.textContent = "";
+            playIcon.classList.add("pause");
+        } else {
+            audio.pause();
+
+            playIcon.textContent = "▶";
+            playIcon.classList.remove("pause");
+        }
+    });
 
     progressBar.addEventListener("pointerdown", function (e) {
         isDragging = true;
@@ -195,11 +214,11 @@ audio.addEventListener("pause", function () {
     });
 
     progressBar.addEventListener("pointermove", function (e) {
-    if (isDragging) {
-        e.preventDefault();
-        seekFromPointer(e);
-    }
-});
+        if (isDragging) {
+            e.preventDefault();
+            seekFromPointer(e);
+        }
+    });
 
     progressBar.addEventListener("pointerup", function () {
         isDragging = false;
@@ -210,53 +229,55 @@ audio.addEventListener("pause", function () {
     });
 
     audio.addEventListener("ended", function () {
-    productCard.classList.remove("playing");
-    playIcon.textContent = "▶";
-    playIcon.classList.remove("pause");
-    progress.style.width = "0%";
-    progressKnob.style.left = "0%";
-    currentTime.textContent = "0:00";
-});
+        product.classList.remove("playing");
 
-        const spectrumBars = document.querySelectorAll(".mini-spectrum span");
+        playIcon.textContent = "▶";
+        playIcon.classList.remove("pause");
 
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const analyser = audioContext.createAnalyser();
-analyser.fftSize = 256;
+        progress.style.width = "0%";
+        progressKnob.style.left = "0%";
+        currentTime.textContent = "0:00";
 
-const source = audioContext.createMediaElementSource(audio);
-source.connect(analyser);
-analyser.connect(audioContext.destination);
+        spectrumRunning = false;
+        cancelAnimationFrame(spectrumAnimationFrame);
+    });
 
-const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioContext.createAnalyser();
 
-function animateSpectrum() {
-    analyser.getByteFrequencyData(frequencyData);
+    analyser.fftSize = 256;
 
-    // Ambil frekuensi rendah = area bass/kick
-    const bass = frequencyData.slice(0, 10);
+    const source = audioContext.createMediaElementSource(audio);
 
-    const averageBass =
-        bass.reduce((sum, value) => sum + value, 0) / bass.length;
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
 
-    spectrumBars.forEach((bar, index) => {
-    const frequencyIndex = index * 3;
-    const frequency = frequencyData[frequencyIndex] || 0;
+    const frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
-    const bassBoost = averageBass * (0.12 + index * 0.025);
-    const height = 2 + (frequency * 0.18) + (bassBoost * 0.5);
-    bar.style.height = Math.min(height, 22) + "px";
-});
+    function animateSpectrum() {
+        if (!spectrumRunning) {
+            return;
+        }
 
-    requestAnimationFrame(animateSpectrum);
-}
+        analyser.getByteFrequencyData(frequencyData);
 
-audio.addEventListener("play", function () {
-    if (audioContext.state === "suspended") {
-        audioContext.resume();
+        const bass = frequencyData.slice(0, 10);
+
+        const averageBass =
+            bass.reduce((sum, value) => sum + value, 0) / bass.length;
+
+        spectrumBars.forEach((bar, index) => {
+            const frequencyIndex = index * 3;
+            const frequency = frequencyData[frequencyIndex] || 0;
+
+            const bassBoost = averageBass * (0.12 + index * 0.025);
+            const height = 2 + (frequency * 0.18) + (bassBoost * 0.5);
+
+            bar.style.height = Math.min(height, 22) + "px";
+        });
+
+        spectrumAnimationFrame = requestAnimationFrame(animateSpectrum);
     }
-
-    animateSpectrum();
 });
 
         const shapes = document.querySelectorAll(".music-shape");
