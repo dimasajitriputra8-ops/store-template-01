@@ -194,6 +194,7 @@ products.forEach((product) => {
     });
 
     playButton.addEventListener("click", function () {
+
     if (audio.paused) {
 
         products.forEach((otherProduct) => {
@@ -216,31 +217,13 @@ products.forEach((product) => {
         playIcon.classList.add("pause");
 
     } else {
+
         audio.pause();
 
         playIcon.textContent = "▶";
         playIcon.classList.remove("pause");
     }
 });
-
-        audio.play();
-
-        playIcon.textContent = "";
-        playIcon.classList.add("pause");
-
-    } else {
-        audio.pause();
-
-        playIcon.textContent = "▶";
-        playIcon.classList.remove("pause");
-    }
-});
-            audio.pause();
-
-            playIcon.textContent = "▶";
-            playIcon.classList.remove("pause");
-        }
-    });
 
     progressBar.addEventListener("pointerdown", function (e) {
         isDragging = true;
