@@ -44,6 +44,42 @@ body::before {
     padding: 30px 10px;
 }
 
+.top-bar {
+    width: 100%;
+    height: 46px;
+    border: 1px solid rgba(155, 77, 255, 0.25);
+    border-radius: 10px;
+    background: rgba(10, 0, 20, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    margin-bottom: 28px;
+}
+
+.menu-button,
+.search-button {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 23px;
+    cursor: pointer;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-button {
+    font-size: 21px;
+}
+
+.search-button {
+    font-size: 27px;
+}
+
 .header h1 {
     font-size: 32px;
     margin-bottom: 10px;
