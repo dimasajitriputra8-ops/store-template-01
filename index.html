@@ -326,21 +326,27 @@ const headphone = document.querySelector(".music-headphone");
 headphone.style.left = (5 + Math.random() * 80) + "%";
 headphone.style.top = (20 + Math.random() * 60) + "%";
 
-        const buyButton = document.querySelector(".buy-button");
-const productName = document.querySelector(".product h3");
+        const buyButtons = document.querySelectorAll(".buy-button");
 
-buyButton.addEventListener("click", function (e) {
-    e.preventDefault();
+buyButtons.forEach((buyButton) => {
 
-    const name = productName.textContent.trim();
-    const message = "Bang, Mau beli " + name;
+    buyButton.addEventListener("click", function (e) {
+        e.preventDefault();
 
-    const whatsappNumber = "6281378484995";
+        const product = buyButton.closest(".product");
+        const productName = product.querySelector("h3");
 
-    window.open(
-        "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message),
-        "_blank"
-    );
+        const name = productName.textContent.trim();
+        const message = "Bang, Mau beli " + name;
+
+        const whatsappNumber = "6281378484995";
+
+        window.open(
+            "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message),
+            "_blank"
+        );
+    });
+
 });
 
         const backToTop = document.querySelector(".back-to-top");
