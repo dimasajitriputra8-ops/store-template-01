@@ -83,19 +83,20 @@ body::before {
 .search-area {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    flex: 1;
 }
 
 .search-input {
     display: none;
-    width: 0;
-    height: 30px;
+    width: 100%;
+    height: 32px;
     border: none;
     outline: none;
     background: transparent;
     color: white;
-    font-size: 13px;
-    transition: width 0.25s ease;
+    font-size: 14px;
+    flex: 1;
 }
 
 .search-input::placeholder {
