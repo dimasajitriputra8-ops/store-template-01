@@ -360,6 +360,14 @@ const headphone = document.querySelector(".music-headphone");
 
 headphone.style.left = (5 + Math.random() * 80) + "%";
 headphone.style.top = (20 + Math.random() * 60) + "%";
+        const searchButton = document.querySelector(".search-button");
+const searchInput = document.querySelector(".search-input");
+
+searchButton.addEventListener("click", function () {
+    searchInput.style.display = "block";
+    searchInput.style.width = "150px";
+    searchInput.focus();
+});
 
         const buyButtons = document.querySelectorAll(".buy-button");
 
