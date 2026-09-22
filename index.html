@@ -371,6 +371,21 @@ searchButton.addEventListener("click", function () {
     searchInput.focus();
 });
 
+        document.addEventListener("click", function (e) {
+
+    if (
+        topBar.classList.contains("search-active") &&
+        !topBar.contains(e.target) &&
+        searchInput.value.trim() === ""
+    ) {
+        topBar.classList.remove("search-active");
+        menuButton.style.display = "flex";
+        searchButton.textContent = "⌕";
+        searchInput.style.display = "none";
+    }
+
+});
+
         const buyButtons = document.querySelectorAll(".buy-button");
 
 buyButtons.forEach((buyButton) => {
